@@ -4,7 +4,7 @@ import {
   AddFinancialRelease,
   AddFinancialReleaseModel,
 } from '../../../domain/usecases/add-financial-release';
-import { MissingParamError } from '../../errors';
+import { MissingParamError, ServerError } from '../../errors';
 import { AddFinancialReleaseController } from './add-financial-release';
 
 interface SutType {
@@ -24,7 +24,7 @@ const makeSut = (): SutType => {
 
 const makeAddFinancialRelease = (): AddFinancialRelease => {
   class AddFinancialReleaseStub implements AddFinancialRelease {
-    add(financialRelease: AddFinancialReleaseModel): FinancialReleaseModel {
+    add(_: AddFinancialReleaseModel): FinancialReleaseModel {
       const fakeFinancialRelease = {
         id: 'valid_id',
         description: 'valid_description',
@@ -126,5 +126,24 @@ describe('AddFinancialRelease Controller', () => {
       date: httpRequest.body.date,
       value: httpRequest.body.value,
     });
+  });
+
+  test('Should return 500 if AddFinancialRelease throws', () => {
+    const { sut, addFinancialRelease } = makeSut();
+    jest.spyOn(addFinancialRelease, 'add').mockImplementationOnce(() => {
+      throw new Error();
+    });
+
+    const httpRequest = {
+      body: {
+        description: 'Venda',
+        type: 'Entrada',
+        date: '2023-06-10',
+        value: 100.0,
+      },
+    };
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual(new ServerError());
   });
 });
