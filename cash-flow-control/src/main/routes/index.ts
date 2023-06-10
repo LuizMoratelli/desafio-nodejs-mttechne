@@ -1,1 +1,1 @@
-export * from './add-financial-release';
+export * from './add-financial-release-routes';
