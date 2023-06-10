@@ -96,7 +96,7 @@ describe('AddFinancialRelease Controller', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
-        description: 'Venda',
+        description: 'valid_description',
         type: 'Entrada',
         date: '2023-06-10',
         value: 100.0,
@@ -105,7 +105,13 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(200);
-    expect(httpResponse.body).toEqual({});
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      description: 'valid_description',
+      type: 'Entrada',
+      date: '2023-06-10',
+      value: 100.0,
+    });
   });
 
   test('Should call AddFinancialRelease with correct values', () => {

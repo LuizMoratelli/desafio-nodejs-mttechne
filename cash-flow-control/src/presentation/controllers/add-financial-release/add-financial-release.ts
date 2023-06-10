@@ -1,6 +1,6 @@
 import { AddFinancialRelease } from '../../../domain/usecases/add-financial-release';
 import { MissingParamError } from '../../errors';
-import { badRequest, serverError } from '../../helpers/http';
+import { badRequest, ok, serverError } from '../../helpers/http';
 import {
   Controller,
   HttpRequest,
@@ -22,9 +22,14 @@ export class AddFinancialReleaseController implements Controller {
 
       const { value, type, date, description } = httpRequest.body;
 
-      this.addFinancialRelease.add({ value, type, date, description });
+      const financialRelease = this.addFinancialRelease.add({
+        value,
+        type,
+        date,
+        description,
+      });
 
-      return { statusCode: 200, body: {} };
+      return ok(financialRelease);
     } catch (error) {
       return serverError();
     }
