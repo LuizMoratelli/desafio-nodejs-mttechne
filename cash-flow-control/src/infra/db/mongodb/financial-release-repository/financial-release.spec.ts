@@ -1,6 +1,5 @@
 import { MongoHelper } from '../helpers/mongodb-helper';
 import { FinancialReleaseMongoRepository } from './financial-release';
-import { Collection, Document } from 'mongodb';
 
 describe('FinancialRelease Mongo Repository', () => {
   beforeAll(async () => {
@@ -9,6 +8,13 @@ describe('FinancialRelease Mongo Repository', () => {
 
   afterAll(async () => {
     await MongoHelper.disconnect();
+  });
+
+  beforeEach(async () => {
+    const financialReleaseCollection = await MongoHelper.getCollection(
+      'financial-releases'
+    );
+    await financialReleaseCollection.deleteMany({});
   });
 
   test('Should return an financialRelease on success', async () => {
