@@ -24,7 +24,7 @@ const makeSut = (): SutType => {
 
 const makeAddFinancialRelease = (): AddFinancialRelease => {
   class AddFinancialReleaseStub implements AddFinancialRelease {
-    add(_: AddFinancialReleaseModel): FinancialReleaseModel {
+    async add(_: AddFinancialReleaseModel): Promise<FinancialReleaseModel> {
       const fakeFinancialRelease = {
         id: 'valid_id',
         description: 'valid_description',
@@ -41,7 +41,7 @@ const makeAddFinancialRelease = (): AddFinancialRelease => {
 };
 
 describe('AddFinancialRelease Controller', () => {
-  test('Should return 400 if no value is provided', () => {
+  test('Should return 400 if no value is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -51,14 +51,14 @@ describe('AddFinancialRelease Controller', () => {
       },
     };
 
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(
       new MissingParamError('Missing param: value')
     );
   });
 
-  test('Should return 400 if no type is provided', () => {
+  test('Should return 400 if no type is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -68,14 +68,14 @@ describe('AddFinancialRelease Controller', () => {
       },
     };
 
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(
       new MissingParamError('Missing param: type')
     );
   });
 
-  test('Should return 400 if no date is provided', () => {
+  test('Should return 400 if no date is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -85,14 +85,14 @@ describe('AddFinancialRelease Controller', () => {
       },
     };
 
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(
       new MissingParamError('Missing param: date')
     );
   });
 
-  test('Should return 200 if valid data is provided', () => {
+  test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -103,7 +103,7 @@ describe('AddFinancialRelease Controller', () => {
       },
     };
 
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(200);
     expect(httpResponse.body).toEqual({
       id: 'valid_id',
@@ -114,7 +114,7 @@ describe('AddFinancialRelease Controller', () => {
     });
   });
 
-  test('Should call AddFinancialRelease with correct values', () => {
+  test('Should call AddFinancialRelease with correct values', async () => {
     const { sut, addFinancialRelease } = makeSut();
     const addSpy = jest.spyOn(addFinancialRelease, 'add');
     const httpRequest = {
@@ -125,7 +125,7 @@ describe('AddFinancialRelease Controller', () => {
         value: 100.0,
       },
     };
-    sut.handle(httpRequest);
+    await sut.handle(httpRequest);
     expect(addSpy).toHaveBeenCalledWith({
       description: httpRequest.body.description,
       type: httpRequest.body.type,
@@ -134,7 +134,7 @@ describe('AddFinancialRelease Controller', () => {
     });
   });
 
-  test('Should return 500 if AddFinancialRelease throws', () => {
+  test('Should return 500 if AddFinancialRelease throws', async () => {
     const { sut, addFinancialRelease } = makeSut();
     jest.spyOn(addFinancialRelease, 'add').mockImplementationOnce(() => {
       throw new Error();
@@ -148,7 +148,7 @@ describe('AddFinancialRelease Controller', () => {
         value: 100.0,
       },
     };
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new ServerError());
   });

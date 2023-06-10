@@ -10,7 +10,7 @@ import {
 export class AddFinancialReleaseController implements Controller {
   constructor(private readonly addFinancialRelease: AddFinancialRelease) {}
 
-  handle(httpRequest: HttpRequest): HttpResponse {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const requiredFields = ['value', 'type', 'date'];
 
@@ -22,7 +22,7 @@ export class AddFinancialReleaseController implements Controller {
 
       const { value, type, date, description } = httpRequest.body;
 
-      const financialRelease = this.addFinancialRelease.add({
+      const financialRelease = await this.addFinancialRelease.add({
         value,
         type,
         date,

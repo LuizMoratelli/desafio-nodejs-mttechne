@@ -8,5 +8,7 @@ export interface AddFinancialReleaseModel {
 }
 
 export interface AddFinancialRelease {
-  add: (financialRelease: AddFinancialReleaseModel) => FinancialReleaseModel;
+  add: (
+    financialRelease: AddFinancialReleaseModel
+  ) => Promise<FinancialReleaseModel>;
 }
