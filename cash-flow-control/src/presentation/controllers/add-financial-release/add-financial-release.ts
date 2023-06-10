@@ -4,18 +4,12 @@ import { HttpRequest, HttpResponse } from './add-financial-release.protocols';
 
 export class AddFinancialReleaseController {
   handle(httpRequest: HttpRequest): HttpResponse {
-    const { value, type, date } = httpRequest.body;
+    const requiredFields = ['value', 'type', 'date'];
 
-    if (!value) {
-      return badRequest(new MissingParamError('Missing param: value'));
-    }
-
-    if (!type) {
-      return badRequest(new MissingParamError('Missing param: type'));
-    }
-
-    if (!date) {
-      return badRequest(new MissingParamError('Missing param: date'));
+    for (const field of requiredFields) {
+      if (!httpRequest.body[field]) {
+        return badRequest(new MissingParamError(`Missing param: ${field}`));
+      }
     }
 
     return { statusCode: 200, body: {} };
