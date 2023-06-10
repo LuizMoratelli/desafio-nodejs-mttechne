@@ -1,4 +1,4 @@
-import { MissingParamError } from '../../errors/missing-param';
+import { MissingParamError } from '../../errors';
 import { AddFinancialReleaseController } from './add-financial-release';
 
 const makeSut = (): AddFinancialReleaseController => {
