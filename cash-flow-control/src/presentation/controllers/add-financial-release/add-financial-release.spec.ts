@@ -1,9 +1,13 @@
 import { MissingParamError } from '../../errors/missing-param';
 import { AddFinancialReleaseController } from './add-financial-release';
 
+const makeSut = (): AddFinancialReleaseController => {
+  return new AddFinancialReleaseController();
+};
+
 describe('AddFinancialRelease Controller', () => {
   test('Should return 400 if no value is provided', () => {
-    const sut = new AddFinancialReleaseController();
+    const sut = makeSut();
     const httpRequest = {
       body: {
         description: 'Venda',
@@ -20,7 +24,7 @@ describe('AddFinancialRelease Controller', () => {
   });
 
   test('Should return 400 if no type is provided', () => {
-    const sut = new AddFinancialReleaseController();
+    const sut = makeSut();
     const httpRequest = {
       body: {
         description: 'Venda',
@@ -37,7 +41,7 @@ describe('AddFinancialRelease Controller', () => {
   });
 
   test('Should return 400 if no date is provided', () => {
-    const sut = new AddFinancialReleaseController();
+    const sut = makeSut();
     const httpRequest = {
       body: {
         description: 'Venda',
@@ -54,7 +58,7 @@ describe('AddFinancialRelease Controller', () => {
   });
 
   test('Should return 200 if valid data is provided', () => {
-    const sut = new AddFinancialReleaseController();
+    const sut = makeSut();
     const httpRequest = {
       body: {
         description: 'Venda',
