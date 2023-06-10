@@ -3,6 +3,6 @@ import { AddFinancialReleaseModel } from '../../domain/usecases/add-financial-re
 
 export interface AddFinancialReleaseRepository {
   add: (
-    accountData: AddFinancialReleaseModel
+    financialReleaseData: AddFinancialReleaseModel
   ) => Promise<FinancialReleaseModel>;
 }

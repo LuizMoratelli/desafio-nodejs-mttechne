@@ -73,7 +73,7 @@ describe('DbAddFinancialRelease Usecase', () => {
       type: 'Entrada' as FinancialReleaseType,
       date: '2023-06-10',
     };
-    const account = await sut.add(data);
-    expect(account).toEqual({ ...data, id: 'valid_id' });
+    const financialRelease = await sut.add(data);
+    expect(financialRelease).toEqual({ ...data, id: 'valid_id' });
   });
 });
