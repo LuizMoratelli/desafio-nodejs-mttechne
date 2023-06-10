@@ -1,8 +1,9 @@
 import { MissingParamError } from '../../errors/missing-param';
 import { badRequest } from '../../helpers/http';
+import { Controller } from '../../protocols/controller';
 import { HttpRequest, HttpResponse } from './add-financial-release.protocols';
 
-export class AddFinancialReleaseController {
+export class AddFinancialReleaseController implements Controller {
   handle(httpRequest: HttpRequest): HttpResponse {
     const requiredFields = ['value', 'type', 'date'];
 
