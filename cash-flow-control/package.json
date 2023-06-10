@@ -7,8 +7,8 @@
   "license": "ISC",
   "scripts": {
     "commit": "cz",
-    "test": "jest --passWithNoTests",
-    "test:staged": "jest --passWithNoTests"
+    "test": "jest --watch",
+    "test:staged": "jest"
   },
   "husky": {
     "hooks": {
