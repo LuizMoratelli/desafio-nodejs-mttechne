@@ -7,8 +7,12 @@
   "license": "ISC",
   "scripts": {
     "commit": "cz",
-    "test": "jest --watch",
-    "test:staged": "jest"
+    "test": "jest --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --runInBand",
+    "test:unit": "yarn test --watch -c jest-unit.config.ts",
+    "test:integration": "yarn test --watch -c ./jest-integration.config.ts",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test --coverage"
   },
   "husky": {
     "hooks": {
