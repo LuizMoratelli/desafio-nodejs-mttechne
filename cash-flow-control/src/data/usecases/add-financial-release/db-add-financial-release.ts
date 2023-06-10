@@ -11,10 +11,6 @@ export class DbAddFinancialRelease implements AddFinancialRelease {
   ) {}
 
   async add(data: AddFinancialReleaseModel): Promise<FinancialReleaseModel> {
-    await this.addFinancialReleaseRepository.add(data);
-
-    return new Promise((resolve) =>
-      resolve({} as unknown as FinancialReleaseModel)
-    );
+    return this.addFinancialReleaseRepository.add(data);
   }
 }

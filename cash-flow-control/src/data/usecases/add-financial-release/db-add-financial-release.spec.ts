@@ -52,7 +52,7 @@ describe('DbAddFinancialRelease Usecase', () => {
     expect(sut.add(financialReleaseData)).resolves;
   });
 
-  test('Should call AddFinancialRelaseRepository with correct values', async () => {
+  test('Should call AddFinancialReleaseRepository with correct values', async () => {
     const { sut, addFinancialReleaseRepository } = makeSut();
     const addSpy = jest.spyOn(addFinancialReleaseRepository, 'add');
     const data = {
@@ -63,5 +63,17 @@ describe('DbAddFinancialRelease Usecase', () => {
     };
     await sut.add(data);
     expect(addSpy).toHaveBeenCalledWith(data);
+  });
+
+  test('Should return an financial release on success', async () => {
+    const { sut } = makeSut();
+    const data = {
+      description: 'valid_description',
+      value: 100.0,
+      type: 'Entrada' as FinancialReleaseType,
+      date: '2023-06-10',
+    };
+    const account = await sut.add(data);
+    expect(account).toEqual({ ...data, id: 'valid_id' });
   });
 });
