@@ -1,8 +1,8 @@
 import { AddFinancialReleaseRepository } from '../../../../data/protocols/add-financial-release';
 import { FinancialReleaseModel } from '../../../../domain/models/financial-release';
 import { AddFinancialReleaseModel } from '../../../../domain/usecases/add-financial-release';
+import { MongoID } from '../helpers/id';
 import { MongoHelper } from '../helpers/mongodb-helper';
-import { ObjectId } from 'mongodb';
 
 export class FinancialReleaseMongoRepository
   implements AddFinancialReleaseRepository
@@ -13,16 +13,9 @@ export class FinancialReleaseMongoRepository
     const result = await collection.insertOne(data);
 
     const financialRelease = await collection.findOne<
-      Omit<FinancialReleaseModel, 'id'> & { _id: ObjectId }
+      MongoID<FinancialReleaseModel>
     >({ _id: result.insertedId });
 
-    if (!financialRelease) throw new Error('Error while inserting');
-
-    const { _id, ...financialReleaseWithoutId } = financialRelease;
-
-    return {
-      ...financialReleaseWithoutId,
-      id: _id.toString(),
-    };
+    return MongoHelper.map<FinancialReleaseModel>(financialRelease);
   }
 }
