@@ -1,5 +1,7 @@
-import { FinancialReleaseModel } from '../models/financial-release';
-import { FinancialReleaseType } from '../models/financial-release-type';
+import {
+  FinancialReleaseModel,
+  FinancialReleaseType,
+} from '../models/financial-release';
 
 export interface AddFinancialReleaseModel {
   description: string;

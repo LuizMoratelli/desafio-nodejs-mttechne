@@ -1,5 +1,7 @@
-import { FinancialReleaseModel } from '../../../domain/models/financial-release';
-import { FinancialReleaseType } from '../../../domain/models/financial-release-type';
+import {
+  FinancialReleaseModel,
+  FinancialReleaseType,
+} from '../../../domain/models/financial-release';
 import {
   AddFinancialRelease,
   AddFinancialReleaseModel,

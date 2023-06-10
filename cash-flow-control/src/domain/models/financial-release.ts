@@ -1,4 +1,4 @@
-import { FinancialReleaseType } from './financial-release-type';
+export type FinancialReleaseType = 'Entrada' | 'Saída';
 
 export interface FinancialReleaseModel {
   id: string;
