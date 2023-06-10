@@ -1,5 +1,7 @@
+import { HttpRequest, HttpResponse } from './add-financial-release.protocols';
+
 export class AddFinancialReleaseController {
-  handle(httpRequest: any): any {
+  handle(httpRequest: HttpRequest): HttpResponse {
     const { value, type, date } = httpRequest.body;
 
     if (!value) {
@@ -22,5 +24,7 @@ export class AddFinancialReleaseController {
         body: new Error('Missing param: date'),
       };
     }
+
+    return { statusCode: 200, body: {} };
   }
 }
