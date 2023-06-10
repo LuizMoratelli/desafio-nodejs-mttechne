@@ -1,7 +1,9 @@
+import { FinancialReleaseType } from './financial-release-type';
+
 export interface FinancialReleaseModel {
   id: string;
   description: string;
   value: number;
-  type: FinancialReleaseModel;
+  type: FinancialReleaseType;
   date: string;
 }
