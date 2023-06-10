@@ -1,3 +1,4 @@
+import { MissingParamError } from '../../errors/missing-param';
 import { HttpRequest, HttpResponse } from './add-financial-release.protocols';
 
 export class AddFinancialReleaseController {
@@ -7,21 +8,21 @@ export class AddFinancialReleaseController {
     if (!value) {
       return {
         statusCode: 400,
-        body: new Error('Missing param: value'),
+        body: new MissingParamError('Missing param: value'),
       };
     }
 
     if (!type) {
       return {
         statusCode: 400,
-        body: new Error('Missing param: type'),
+        body: new MissingParamError('Missing param: type'),
       };
     }
 
     if (!date) {
       return {
         statusCode: 400,
-        body: new Error('Missing param: date'),
+        body: new MissingParamError('Missing param: date'),
       };
     }
 

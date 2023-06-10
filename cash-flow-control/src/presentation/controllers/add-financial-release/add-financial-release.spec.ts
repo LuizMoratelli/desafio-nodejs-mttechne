@@ -1,3 +1,4 @@
+import { MissingParamError } from '../../errors/missing-param';
 import { AddFinancialReleaseController } from './add-financial-release';
 
 describe('AddFinancialRelease Controller', () => {
@@ -13,7 +14,9 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error('Missing param: value'));
+    expect(httpResponse.body).toEqual(
+      new MissingParamError('Missing param: value')
+    );
   });
 
   test('Should return 400 if no type is provided', () => {
@@ -28,7 +31,9 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error('Missing param: type'));
+    expect(httpResponse.body).toEqual(
+      new MissingParamError('Missing param: type')
+    );
   });
 
   test('Should return 400 if no date is provided', () => {
@@ -43,7 +48,9 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error('Missing param: date'));
+    expect(httpResponse.body).toEqual(
+      new MissingParamError('Missing param: date')
+    );
   });
 
   test('Should return 200 if valid data is provided', () => {
