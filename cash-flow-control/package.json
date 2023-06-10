@@ -1,0 +1,26 @@
+{
+  "name": "cash-flow-control",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Luiz Moratelli <la.moratelli@gmail.com>",
+  "license": "ISC",
+  "scripts": {
+    "commit": "cz"
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3"
+  }
+}
