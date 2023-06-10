@@ -1,5 +1,5 @@
-import { FinancialReleaseType } from '../../../domain/models/financial-release-type';
 import { DbAddFinancialRelease } from './db-add-financial-release';
+import { FinancialReleaseType } from './db-add-financial-release.protocols';
 
 const makeSut = (): DbAddFinancialRelease => {
   return new DbAddFinancialRelease();

@@ -1,8 +1,8 @@
-import { FinancialReleaseModel } from '../../../domain/models/financial-release';
 import {
   AddFinancialRelease,
   AddFinancialReleaseModel,
-} from '../../../domain/usecases/add-financial-release';
+  FinancialReleaseModel,
+} from './db-add-financial-release.protocols';
 
 export class DbAddFinancialRelease implements AddFinancialRelease {
   constructor() {}
