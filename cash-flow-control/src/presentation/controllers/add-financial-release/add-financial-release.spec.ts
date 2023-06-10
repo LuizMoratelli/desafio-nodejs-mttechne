@@ -45,4 +45,20 @@ describe('AddFinancialRelease Controller', () => {
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new Error('Missing param: date'));
   });
+
+  test('Should return 200 if valid data is provided', () => {
+    const sut = new AddFinancialReleaseController();
+    const httpRequest = {
+      body: {
+        description: 'Venda',
+        type: 'Entrada',
+        date: '2023-06-10',
+        value: 100.0,
+      },
+    };
+
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(200);
+    expect(httpResponse.body).toEqual({});
+  });
 });
