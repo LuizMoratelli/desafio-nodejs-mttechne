@@ -1,3 +1,4 @@
+import { AddFinancialRelease } from '../../../domain/usecases/add-financial-release';
 import { MissingParamError } from '../../errors';
 import { badRequest, serverError } from '../../helpers/http';
 import {
@@ -7,6 +8,8 @@ import {
 } from './add-financial-release.protocols';
 
 export class AddFinancialReleaseController implements Controller {
+  constructor(private readonly addFinancialRelease: AddFinancialRelease) {}
+
   handle(httpRequest: HttpRequest): HttpResponse {
     try {
       const requiredFields = ['value', 'type', 'date'];
@@ -16,6 +19,10 @@ export class AddFinancialReleaseController implements Controller {
           return badRequest(new MissingParamError(`Missing param: ${field}`));
         }
       }
+
+      const { value, type, date, description } = httpRequest.body;
+
+      this.addFinancialRelease.add({ value, type, date, description });
 
       return { statusCode: 200, body: {} };
     } catch (error) {
