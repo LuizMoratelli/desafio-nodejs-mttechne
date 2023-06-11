@@ -28,7 +28,7 @@ const makeAddFinancialReleaseRepository = (): AddFinancialReleaseRepository => {
         id: 'valid_id',
         description: 'valid_description',
         value: 100.0,
-        type: 'Entrada' as FinancialReleaseType,
+        type: FinancialReleaseType.ENTRADA,
         date: '2023-06-10',
       };
       return new Promise((resolve) => resolve(fakeFinancialRelease));
@@ -43,7 +43,7 @@ describe('DbAddFinancialRelease Usecase', () => {
     const financialReleaseData = {
       description: 'valid_description',
       value: 100.0,
-      type: 'Entrada' as FinancialReleaseType,
+      type: FinancialReleaseType.ENTRADA,
       date: '2023-06-10',
     };
 
@@ -56,7 +56,7 @@ describe('DbAddFinancialRelease Usecase', () => {
     const data = {
       description: 'valid_description',
       value: 100.0,
-      type: 'Entrada' as FinancialReleaseType,
+      type: FinancialReleaseType.ENTRADA,
       date: '2023-06-10',
     };
     await sut.add(data);
@@ -68,7 +68,7 @@ describe('DbAddFinancialRelease Usecase', () => {
     const data = {
       description: 'valid_description',
       value: 100.0,
-      type: 'Entrada' as FinancialReleaseType,
+      type: FinancialReleaseType.ENTRADA,
       date: '2023-06-10',
     };
     const financialRelease = await sut.add(data);

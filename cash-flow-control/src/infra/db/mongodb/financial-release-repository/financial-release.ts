@@ -8,13 +8,15 @@ import { ObjectId } from 'mongodb';
 import { GetFinancialReleaseRepository } from '@/data/protocols/get-financial-release';
 import { GetAllFinancialRelease } from '@/domain/usecases/get-all-financial-release';
 import { DeleteFinancialRelease, DeleteFinancialReleaseModel } from '@/domain/usecases/delete-financial-release';
+import { UpdateFinancialRelease, UpdateFinancialReleaseModel } from '@/domain/usecases/update-financial-release';
 
 export class FinancialReleaseMongoRepository
   implements
     AddFinancialReleaseRepository,
     GetFinancialReleaseRepository,
     GetAllFinancialRelease,
-    DeleteFinancialRelease
+    DeleteFinancialRelease,
+    UpdateFinancialRelease
 {
   private getCollection = async () => {
     const collection = await MongoHelper.getCollection('financial-releases');
@@ -60,6 +62,16 @@ export class FinancialReleaseMongoRepository
   async delete({ id }: DeleteFinancialReleaseModel): Promise<void> {
     const collection = await this.getCollection();
 
-    const financialRelease = await collection.deleteOne({ _id: new ObjectId(id) });
+    await collection.deleteOne({ _id: new ObjectId(id) });
+  }
+
+  async update({ id, ...data }: UpdateFinancialReleaseModel): Promise<FinancialReleaseModel> {
+    const collection = await this.getCollection();
+
+    await collection.updateOne({ _id: new ObjectId(id) }, { $set: data });
+
+    const financialRelease = await collection.findOne<MongoID<FinancialReleaseModel>>({ _id: new ObjectId(id) });
+
+    return MongoHelper.map<FinancialReleaseModel>(financialRelease);
   }
 }

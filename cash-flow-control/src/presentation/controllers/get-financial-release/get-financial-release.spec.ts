@@ -27,7 +27,7 @@ const makeGetFinancialRelease = (): GetFinancialRelease => {
         id: 'valid_id',
         description: 'valid_description',
         value: 100.0,
-        type: 'Entrada' as FinancialReleaseType,
+        type: FinancialReleaseType.ENTRADA,
         date: '2023-06-10',
       };
 

@@ -1,28 +1,28 @@
 import { FinancialReleaseModel, FinancialReleaseType } from '@/domain/models/financial-release';
-import { AddFinancialRelease, AddFinancialReleaseModel } from '@/domain/usecases/add-financial-release';
+import { UpdateFinancialRelease, UpdateFinancialReleaseModel } from '@/domain/usecases/update-financial-release';
 import { ServerError } from '@/presentation/errors';
-import { AddFinancialReleaseController } from './add-financial-release';
+import { UpdateFinancialReleaseController } from './update-financial-release';
 import { DtoValidator, Validator } from '@/infra/validation/class-validator';
 
 type SutType = {
-  sut: AddFinancialReleaseController;
-  addFinancialRelease: AddFinancialRelease;
+  sut: UpdateFinancialReleaseController;
+  updateFinancialRelease: UpdateFinancialRelease;
 };
 
 const makeSut = (): SutType => {
-  const addFinancialRelease = makeAddFinancialRelease();
+  const updateFinancialRelease = makeUpdateFinancialRelease();
   const validator = makeValidator();
-  const sut = new AddFinancialReleaseController(addFinancialRelease, validator);
+  const sut = new UpdateFinancialReleaseController(updateFinancialRelease, validator);
 
   return {
     sut,
-    addFinancialRelease,
+    updateFinancialRelease,
   };
 };
 
-const makeAddFinancialRelease = (): AddFinancialRelease => {
-  class AddFinancialReleaseStub implements AddFinancialRelease {
-    async add(_: AddFinancialReleaseModel): Promise<FinancialReleaseModel> {
+const makeUpdateFinancialRelease = (): UpdateFinancialRelease => {
+  class UpdateFinancialReleaseStub implements UpdateFinancialRelease {
+    async update(_: UpdateFinancialReleaseModel): Promise<FinancialReleaseModel> {
       const fakeFinancialRelease = {
         id: 'valid_id',
         description: 'valid_description',
@@ -35,18 +35,19 @@ const makeAddFinancialRelease = (): AddFinancialRelease => {
     }
   }
 
-  return new AddFinancialReleaseStub();
+  return new UpdateFinancialReleaseStub();
 };
 
 const makeValidator = (): Validator => {
   return new DtoValidator();
 };
 
-describe('AddFinancialRelease Controller', () => {
+describe('UpdateFinancialRelease Controller', () => {
   test('Should return 400 if no value is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
+        id: 'valid_id',
         description: 'Venda',
         type: 'Entrada',
         date: '2023-06-10',
@@ -72,6 +73,7 @@ describe('AddFinancialRelease Controller', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
+        id: 'valid_id',
         description: 'Venda',
         value: 100.0,
         date: '2023-06-10',
@@ -93,6 +95,7 @@ describe('AddFinancialRelease Controller', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
+        id: 'valid_id',
         description: 'Venda',
         type: 'Entrada',
         value: 100.0,
@@ -110,10 +113,33 @@ describe('AddFinancialRelease Controller', () => {
     });
   });
 
+  test('Should return 400 if no id is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: {
+        description: 'Venda',
+        type: 'Entrada',
+        value: 100.0,
+        date: '2023-06-10',
+      },
+    };
+
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toMatchObject({
+      invalidParams: [
+        {
+          id: ['id should not be null or undefined', 'id must be a string'],
+        },
+      ],
+    });
+  });
+
   test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
+        id: 'valid_id',
         description: 'valid_description',
         type: 'Entrada',
         date: '2023-06-10',
@@ -132,11 +158,12 @@ describe('AddFinancialRelease Controller', () => {
     });
   });
 
-  test('Should call AddFinancialRelease with correct values', async () => {
-    const { sut, addFinancialRelease } = makeSut();
-    const addSpy = jest.spyOn(addFinancialRelease, 'add');
+  test('Should call UpdateFinancialRelease with correct values', async () => {
+    const { sut, updateFinancialRelease } = makeSut();
+    const updateSpy = jest.spyOn(updateFinancialRelease, 'update');
     const httpRequest = {
       body: {
+        id: 'valid_id',
         description: 'Venda',
         type: 'Entrada',
         date: '2023-06-10',
@@ -144,7 +171,8 @@ describe('AddFinancialRelease Controller', () => {
       },
     };
     await sut.handle(httpRequest);
-    expect(addSpy).toHaveBeenCalledWith({
+    expect(updateSpy).toHaveBeenCalledWith({
+      id: httpRequest.body.id,
       description: httpRequest.body.description,
       type: httpRequest.body.type,
       date: httpRequest.body.date,
@@ -152,14 +180,15 @@ describe('AddFinancialRelease Controller', () => {
     });
   });
 
-  test('Should return 500 if AddFinancialRelease throws', async () => {
-    const { sut, addFinancialRelease } = makeSut();
-    jest.spyOn(addFinancialRelease, 'add').mockImplementationOnce(() => {
+  test('Should return 500 if UpdateFinancialRelease throws', async () => {
+    const { sut, updateFinancialRelease } = makeSut();
+    jest.spyOn(updateFinancialRelease, 'update').mockImplementationOnce(() => {
       throw new Error();
     });
 
     const httpRequest = {
       body: {
+        id: 'valid_id',
         description: 'Venda',
         type: 'Entrada',
         date: '2023-06-10',
