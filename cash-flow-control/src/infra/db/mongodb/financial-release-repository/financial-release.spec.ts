@@ -11,9 +11,7 @@ describe('FinancialRelease Mongo Repository', () => {
   });
 
   beforeEach(async () => {
-    const financialReleaseCollection = await MongoHelper.getCollection(
-      'financial-releases'
-    );
+    const financialReleaseCollection = await MongoHelper.getCollection('financial-releases');
     await financialReleaseCollection.deleteMany({});
   });
 

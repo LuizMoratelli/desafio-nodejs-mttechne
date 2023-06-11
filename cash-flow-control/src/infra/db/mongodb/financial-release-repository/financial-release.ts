@@ -6,7 +6,7 @@ import { MongoHelper } from '../helpers/mongodb-helper';
 
 export class FinancialReleaseMongoRepository implements AddFinancialReleaseRepository {
   async add(data: AddFinancialReleaseModel): Promise<FinancialReleaseModel> {
-    const collection = MongoHelper.getCollection('financial-releases');
+    const collection = await MongoHelper.getCollection('financial-releases');
 
     const result = await collection.insertOne(data);
 
