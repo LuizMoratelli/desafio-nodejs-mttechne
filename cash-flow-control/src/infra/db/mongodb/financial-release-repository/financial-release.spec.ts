@@ -46,11 +46,11 @@ describe('FinancialRelease Mongo Repository', () => {
       id: createdFinancialRelease.id,
     });
 
-    expect(financialRelease).toBeTruthy();
-    expect(financialRelease.id).toBeTruthy();
-    expect(financialRelease.date).toBe('2023-06-10');
-    expect(financialRelease.description).toBe('valid_description');
-    expect(financialRelease.type).toBe(FinancialReleaseType.ENTRADA);
-    expect(financialRelease.value).toBe(100.0);
+    expect(financialRelease).toBeDefined();
+    expect(financialRelease?.id).toBeTruthy();
+    expect(financialRelease?.date).toBe('2023-06-10');
+    expect(financialRelease?.description).toBe('valid_description');
+    expect(financialRelease?.type).toBe(FinancialReleaseType.ENTRADA);
+    expect(financialRelease?.value).toBe(100.0);
   });
 });

@@ -5,8 +5,9 @@ import { MongoID } from '../helpers/id';
 import { MongoHelper } from '../helpers/mongodb-helper';
 import { GetFinancialReleaseModel } from '@/domain/usecases/get-financial-release';
 import { ObjectId } from 'mongodb';
+import { GetFinancialReleaseRepository } from '@/data/protocols/get-financial-release';
 
-export class FinancialReleaseMongoRepository implements AddFinancialReleaseRepository {
+export class FinancialReleaseMongoRepository implements AddFinancialReleaseRepository, GetFinancialReleaseRepository {
   private getCollection = async () => {
     const collection = await MongoHelper.getCollection('financial-releases');
 
@@ -23,11 +24,11 @@ export class FinancialReleaseMongoRepository implements AddFinancialReleaseRepos
     return MongoHelper.map<FinancialReleaseModel>(financialRelease);
   }
 
-  async get({ id }: GetFinancialReleaseModel): Promise<FinancialReleaseModel> {
+  async get({ id }: GetFinancialReleaseModel): Promise<FinancialReleaseModel | null> {
     const collection = await this.getCollection();
 
     const financialRelease = await collection.findOne<MongoID<FinancialReleaseModel>>({ _id: new ObjectId(id) });
 
-    return MongoHelper.map<FinancialReleaseModel>(financialRelease);
+    return financialRelease && MongoHelper.map<FinancialReleaseModel>(financialRelease);
   }
 }
