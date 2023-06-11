@@ -3,10 +3,10 @@ import { AddFinancialRelease, AddFinancialReleaseModel } from '@/domain/usecases
 import { MissingParamError, ServerError } from '@/presentation/errors';
 import { AddFinancialReleaseController } from './add-financial-release';
 
-interface SutType {
+type SutType = {
   sut: AddFinancialReleaseController;
   addFinancialRelease: AddFinancialRelease;
-}
+};
 
 const makeSut = (): SutType => {
   const addFinancialRelease = makeAddFinancialRelease();

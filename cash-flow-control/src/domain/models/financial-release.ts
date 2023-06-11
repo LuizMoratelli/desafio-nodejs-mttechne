@@ -1,9 +1,9 @@
 export type FinancialReleaseType = 'Entrada' | 'Saída';
 
-export interface FinancialReleaseModel {
+export type FinancialReleaseModel = {
   id: string;
   description: string;
   value: number;
   type: FinancialReleaseType;
   date: string;
-}
+};

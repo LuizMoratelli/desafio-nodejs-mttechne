@@ -6,10 +6,10 @@ import {
   FinancialReleaseType,
 } from './db-add-financial-release.protocols';
 
-interface SutTypes {
+type SutTypes = {
   sut: DbAddFinancialRelease;
   addFinancialReleaseRepository: AddFinancialReleaseRepository;
-}
+};
 
 const makeSut = (): SutTypes => {
   const addFinancialReleaseRepository = makeAddFinancialReleaseRepository();
@@ -22,9 +22,7 @@ const makeSut = (): SutTypes => {
 };
 
 const makeAddFinancialReleaseRepository = (): AddFinancialReleaseRepository => {
-  class AddFinancialReleaseRepositoryStub
-    implements AddFinancialReleaseRepository
-  {
+  class AddFinancialReleaseRepositoryStub implements AddFinancialReleaseRepository {
     async add(_: AddFinancialReleaseModel): Promise<FinancialReleaseModel> {
       const fakeFinancialRelease = {
         id: 'valid_id',
