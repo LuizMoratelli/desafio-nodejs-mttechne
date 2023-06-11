@@ -6,8 +6,11 @@ import { MongoHelper } from '../helpers/mongodb-helper';
 import { GetFinancialReleaseModel } from '@/domain/usecases/get-financial-release';
 import { ObjectId } from 'mongodb';
 import { GetFinancialReleaseRepository } from '@/data/protocols/get-financial-release';
+import { GetAllFinancialRelease } from '@/domain/usecases/get-all-financial-release';
 
-export class FinancialReleaseMongoRepository implements AddFinancialReleaseRepository, GetFinancialReleaseRepository {
+export class FinancialReleaseMongoRepository
+  implements AddFinancialReleaseRepository, GetFinancialReleaseRepository, GetAllFinancialRelease
+{
   private getCollection = async () => {
     const collection = await MongoHelper.getCollection('financial-releases');
 
@@ -30,5 +33,22 @@ export class FinancialReleaseMongoRepository implements AddFinancialReleaseRepos
     const financialRelease = await collection.findOne<MongoID<FinancialReleaseModel>>({ _id: new ObjectId(id) });
 
     return financialRelease && MongoHelper.map<FinancialReleaseModel>(financialRelease);
+  }
+
+  async getAll(): Promise<FinancialReleaseModel[]> {
+    const collection = await this.getCollection();
+    const all = [] as FinancialReleaseModel[];
+
+    const financialReleasesCursor = collection.find<MongoID<FinancialReleaseModel>>({});
+
+    while (await financialReleasesCursor.hasNext()) {
+      const nextItem = await financialReleasesCursor.next();
+
+      if (nextItem) {
+        all.push(MongoHelper.map<FinancialReleaseModel>(nextItem));
+      }
+    }
+
+    return all;
   }
 }

@@ -25,11 +25,8 @@ export class GetFinancialReleaseController implements Controller {
         return notFound(new NotFoundError(data.id));
       }
 
-      console.log(financialRelease);
-
       return ok(financialRelease);
     } catch (error) {
-      console.log(error);
       return serverError();
     }
   }

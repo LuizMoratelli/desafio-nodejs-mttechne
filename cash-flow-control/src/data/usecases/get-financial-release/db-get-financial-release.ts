@@ -6,9 +6,9 @@ import {
 } from './db-get-financial-release.protocols';
 
 export class DbGetFinancialRelease implements GetFinancialRelease {
-  constructor(private readonly addFinancialReleaseRepository: GetFinancialReleaseRepository) {}
+  constructor(private readonly getFinancialReleaseRepository: GetFinancialReleaseRepository) {}
 
   async get(data: GetFinancialReleaseModel): Promise<FinancialReleaseModel | null> {
-    return this.addFinancialReleaseRepository.get(data);
+    return this.getFinancialReleaseRepository.get(data);
   }
 }
