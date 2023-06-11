@@ -7,6 +7,7 @@ const config: Config = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**',
     '!<rootDir>/src/**/*.protocols.ts',
+    '!<rootDir>/src/**/*.d.ts',
     '!<rootDir>/**/protocols/**/*.ts',
     '!<rootDir>/**/domain/**/*.ts',
     '!**/test/**',
