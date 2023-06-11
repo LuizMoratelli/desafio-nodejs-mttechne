@@ -1,7 +1,8 @@
 import { FinancialReleaseModel, FinancialReleaseType } from '@/domain/models/financial-release';
 import { AddFinancialRelease, AddFinancialReleaseModel } from '@/domain/usecases/add-financial-release';
-import { MissingParamError, ServerError } from '@/presentation/errors';
+import { ServerError } from '@/presentation/errors';
 import { AddFinancialReleaseController } from './add-financial-release';
+import { DtoValidator, Validator } from '@/infra/validation/class-validator';
 
 type SutType = {
   sut: AddFinancialReleaseController;
@@ -10,7 +11,8 @@ type SutType = {
 
 const makeSut = (): SutType => {
   const addFinancialRelease = makeAddFinancialRelease();
-  const sut = new AddFinancialReleaseController(addFinancialRelease);
+  const validator = makeValidator();
+  const sut = new AddFinancialReleaseController(addFinancialRelease, validator);
 
   return {
     sut,
@@ -36,6 +38,10 @@ const makeAddFinancialRelease = (): AddFinancialRelease => {
   return new AddFinancialReleaseStub();
 };
 
+const makeValidator = (): Validator => {
+  return new DtoValidator();
+};
+
 describe('AddFinancialRelease Controller', () => {
   test('Should return 400 if no value is provided', async () => {
     const { sut } = makeSut();
@@ -49,7 +55,17 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new MissingParamError('Missing param: value'));
+    expect(httpResponse.body).toMatchObject({
+      invalidParams: [
+        {
+          value: [
+            'value should not be null or undefined',
+            'value must be a positive number',
+            'value must be a number conforming to the specified constraints',
+          ],
+        },
+      ],
+    });
   });
 
   test('Should return 400 if no type is provided', async () => {
@@ -64,7 +80,13 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new MissingParamError('Missing param: type'));
+    expect(httpResponse.body).toMatchObject({
+      invalidParams: [
+        {
+          type: ['type should not be null or undefined', 'type must be one of the following values: Entrada, Saída'],
+        },
+      ],
+    });
   });
 
   test('Should return 400 if no date is provided', async () => {
@@ -79,7 +101,13 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new MissingParamError('Missing param: date'));
+    expect(httpResponse.body).toMatchObject({
+      invalidParams: [
+        {
+          date: ['date should not be null or undefined', 'date must be a valid ISO 8601 date string'],
+        },
+      ],
+    });
   });
 
   test('Should return 200 if valid data is provided', async () => {
