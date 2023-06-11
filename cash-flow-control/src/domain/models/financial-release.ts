@@ -1,4 +1,7 @@
-export type FinancialReleaseType = 'Entrada' | 'Saída';
+export enum FinancialReleaseType {
+  'ENTRADA' = 'Entrada',
+  'SAIDA' = 'Saída',
+}
 
 export type FinancialReleaseModel = {
   id: string;

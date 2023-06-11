@@ -1,7 +1,7 @@
 import { ServerError } from '@/presentation/errors';
 import { HttpResponse } from '@/presentation/protocols/http';
 
-export const badRequest = (error: Error): HttpResponse<Error> => ({
+export const badRequest = (error: Error | object): HttpResponse<Error | object> => ({
   statusCode: 400,
   body: error,
 });

@@ -1,4 +1,6 @@
 import 'module-alias/register';
+import 'reflect-metadata';
+
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongodb-helper';
 import env from './config/env';
 
