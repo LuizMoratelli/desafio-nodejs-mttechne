@@ -1,6 +1,6 @@
-import { AddFinancialReleaseRepository } from '../../../../data/protocols/add-financial-release';
-import { FinancialReleaseModel } from '../../../../domain/models/financial-release';
-import { AddFinancialReleaseModel } from '../../../../domain/usecases/add-financial-release';
+import { AddFinancialReleaseRepository } from '@/data/protocols/add-financial-release';
+import { FinancialReleaseModel } from '@/domain/models/financial-release';
+import { AddFinancialReleaseModel } from '@/domain/usecases/add-financial-release';
 import { MongoID } from '../helpers/id';
 import { MongoHelper } from '../helpers/mongodb-helper';
 

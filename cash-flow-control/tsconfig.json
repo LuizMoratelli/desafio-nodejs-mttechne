@@ -5,6 +5,13 @@
     "target": "ES2022",
     "esModuleInterop": true,
     "allowJs": true,
-    "strictNullChecks": true
-  }
+    "strictNullChecks": true,
+    "rootDirs": ["src", "."],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": []
 }

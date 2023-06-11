@@ -1,12 +1,6 @@
-import {
-  FinancialReleaseModel,
-  FinancialReleaseType,
-} from '../../../domain/models/financial-release';
-import {
-  AddFinancialRelease,
-  AddFinancialReleaseModel,
-} from '../../../domain/usecases/add-financial-release';
-import { MissingParamError, ServerError } from '../../errors';
+import { FinancialReleaseModel, FinancialReleaseType } from '@/domain/models/financial-release';
+import { AddFinancialRelease, AddFinancialReleaseModel } from '@/domain/usecases/add-financial-release';
+import { MissingParamError, ServerError } from '@/presentation/errors';
 import { AddFinancialReleaseController } from './add-financial-release';
 
 interface SutType {
@@ -55,9 +49,7 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(
-      new MissingParamError('Missing param: value')
-    );
+    expect(httpResponse.body).toEqual(new MissingParamError('Missing param: value'));
   });
 
   test('Should return 400 if no type is provided', async () => {
@@ -72,9 +64,7 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(
-      new MissingParamError('Missing param: type')
-    );
+    expect(httpResponse.body).toEqual(new MissingParamError('Missing param: type'));
   });
 
   test('Should return 400 if no date is provided', async () => {
@@ -89,9 +79,7 @@ describe('AddFinancialRelease Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(
-      new MissingParamError('Missing param: date')
-    );
+    expect(httpResponse.body).toEqual(new MissingParamError('Missing param: date'));
   });
 
   test('Should return 200 if valid data is provided', async () => {

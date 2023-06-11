@@ -1,7 +1,4 @@
-import {
-  FinancialReleaseModel,
-  FinancialReleaseType,
-} from '../models/financial-release';
+import { FinancialReleaseModel, FinancialReleaseType } from '@/domain/models/financial-release';
 
 export interface AddFinancialReleaseModel {
   description: string;
@@ -11,7 +8,5 @@ export interface AddFinancialReleaseModel {
 }
 
 export interface AddFinancialRelease {
-  add: (
-    financialRelease: AddFinancialReleaseModel
-  ) => Promise<FinancialReleaseModel>;
+  add: (financialRelease: AddFinancialReleaseModel) => Promise<FinancialReleaseModel>;
 }

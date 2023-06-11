@@ -1,12 +1,10 @@
 import request from 'supertest';
-import app from '../config/app';
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongodb-helper';
+import app from '@/main/config/app';
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongodb-helper';
 
 describe('AddFinancialRelease Routes', () => {
   beforeEach(async () => {
-    const financialReleaseCollection = await MongoHelper.getCollection(
-      'financial-releases'
-    );
+    const financialReleaseCollection = await MongoHelper.getCollection('financial-releases');
     await financialReleaseCollection.deleteMany({});
   });
 

@@ -1,1 +1,1 @@
-export { HttpRequest, HttpResponse, Controller } from '../../protocols';
+export { HttpRequest, HttpResponse, Controller } from '@/presentation/protocols';

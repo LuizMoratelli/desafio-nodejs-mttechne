@@ -1,11 +1,7 @@
-import { AddFinancialRelease } from '../../../domain/usecases/add-financial-release';
-import { MissingParamError } from '../../errors';
-import { badRequest, ok, serverError } from '../../helpers/http';
-import {
-  Controller,
-  HttpRequest,
-  HttpResponse,
-} from './add-financial-release.protocols';
+import { AddFinancialRelease } from '@/domain/usecases/add-financial-release';
+import { MissingParamError } from '@/presentation/errors';
+import { badRequest, ok, serverError } from '@/presentation/helpers/http';
+import { Controller, HttpRequest, HttpResponse } from './add-financial-release.protocols';
 
 export class AddFinancialReleaseController implements Controller {
   constructor(private readonly addFinancialRelease: AddFinancialRelease) {}

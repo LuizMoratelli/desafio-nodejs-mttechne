@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../config/app';
+import app from '@/main/config/app';
 
 describe('Content Type Middleware', () => {
   test('Should return default content type as json', async () => {
@@ -16,8 +16,6 @@ describe('Content Type Middleware', () => {
       res.send();
     });
 
-    await request(app)
-      .get('/test_content_type_xml')
-      .expect('content-type', /xml/);
+    await request(app).get('/test_content_type_xml').expect('content-type', /xml/);
   });
 });
