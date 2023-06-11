@@ -1,0 +1,225 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-06-11T21:23:27.351Z",
+  "__export_source": "insomnia.desktop.app:v2023.2.2",
+  "resources": [
+    {
+      "_id": "req_2eb34c37b354443f904f58d2cfb839dd",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686514414611,
+      "created": 1686507087520,
+      "url": "{{ _['cash-flow-control'] }}/api/financial-release",
+      "name": "Get All Financial Release",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1686461248607.0625,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "parentId": null,
+      "modified": 1686486448301,
+      "created": 1686486448301,
+      "name": "Desafio NodeJS Mttechne",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_2a1531f46f9b410dba249b94b38a8716",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686515884890,
+      "created": 1686486495047,
+      "url": "{{ _['cash-flow-control'] }}/api/financial-release",
+      "name": "Add Financial Release",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"description\": \"\",\n\t\"date\": \"2023-06-11\",\n\t\"value\": 0.02,\n\t\"type\": \"Saída\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1686448625387.0938,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b6da792145e9439690408d13909e8012",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686514411036,
+      "created": 1686502761315,
+      "url": "{{ _['cash-flow-control'] }}/api/financial-release/648618ec680daa10c69b133f",
+      "name": "Get Financial Release",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1686436002167.125,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_21f908aca2464e87b55e5b1e20cc1736",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686510075245,
+      "created": 1686509783048,
+      "url": "{{ _['cash-flow-control'] }}/api/financial-release/648618ec680daa10c69b133f",
+      "name": "UpdateFinancial Release",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"description\": \"Descrição\",\n\t\"date\": \"2023-06-11\",\n\t\"value\": -120.5,\n\t\"type\": \"Entrada\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1686385509287.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_46e0759e30e74a119da50fdfbe434b48",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686508277284,
+      "created": 1686508228516,
+      "url": "{{ _['cash-flow-control'] }}/api/financial-release/6485d5365f18ebd9ccd82bb0",
+      "name": "Delete Financial Release",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1686183537717.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cd253fd7b2ed4298aefea87cc25d97a5",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686514421234,
+      "created": 1686514400131,
+      "url": "{{ _['consolidated-daily'] }}/api/report",
+      "name": "Get Report",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1686183537667.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_8b748df04aaaf941fece4966dc7b881d496b2420",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686486456019,
+      "created": 1686486448305,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": {},
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1686486448306,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_8b748df04aaaf941fece4966dc7b881d496b2420",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686486448308,
+      "created": 1686486448308,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_0f52a898e6a5415f83f7b28fcb24449f",
+      "parentId": "wrk_4d615ff23f9e4ef188ef03843824554f",
+      "modified": 1686486448302,
+      "created": 1686486448302,
+      "fileName": "Desafio NodeJS Mttechne",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_277eec14c290429dad2592d92a5a26d2",
+      "parentId": "env_8b748df04aaaf941fece4966dc7b881d496b2420",
+      "modified": 1686514395457,
+      "created": 1686486456939,
+      "name": "Local",
+      "data": {
+        "cash-flow-control": "http://localhost:3001",
+        "consolidated-daily": "http://localhost:3002"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "cash-flow-control",
+          "consolidated-daily"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1686486456939,
+      "_type": "environment"
+    }
+  ]
+}

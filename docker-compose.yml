@@ -1,0 +1,39 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo-container
+    image: mongo
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+
+  cash-flow-control:
+    container_name: cash-flow-control-container
+    image: cash-flow-control-image
+    build: 
+      context: cash-flow-control
+      dockerfile: ./Dockerfile
+    restart: always
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/desafio-nodejs-mttechne
+    ports:
+      - "3001:3001"
+    links:
+      - mongo
+
+  consolidated-daily:
+    container_name: consolidated-daily-container
+    image: consolidated-daily-image
+    build: 
+      context: consolidated-daily
+      dockerfile: ./Dockerfile
+    restart: always
+    command: bash -c "npm install --omit=dev && npm run start"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/desafio-nodejs-mttechne
+    ports:
+      - "3002:3002"
+    links:
+      - mongo
