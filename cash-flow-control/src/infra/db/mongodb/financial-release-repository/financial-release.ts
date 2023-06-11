@@ -7,9 +7,14 @@ import { GetFinancialReleaseModel } from '@/domain/usecases/get-financial-releas
 import { ObjectId } from 'mongodb';
 import { GetFinancialReleaseRepository } from '@/data/protocols/get-financial-release';
 import { GetAllFinancialRelease } from '@/domain/usecases/get-all-financial-release';
+import { DeleteFinancialRelease, DeleteFinancialReleaseModel } from '@/domain/usecases/delete-financial-release';
 
 export class FinancialReleaseMongoRepository
-  implements AddFinancialReleaseRepository, GetFinancialReleaseRepository, GetAllFinancialRelease
+  implements
+    AddFinancialReleaseRepository,
+    GetFinancialReleaseRepository,
+    GetAllFinancialRelease,
+    DeleteFinancialRelease
 {
   private getCollection = async () => {
     const collection = await MongoHelper.getCollection('financial-releases');
@@ -50,5 +55,11 @@ export class FinancialReleaseMongoRepository
     }
 
     return all;
+  }
+
+  async delete({ id }: DeleteFinancialReleaseModel): Promise<void> {
+    const collection = await this.getCollection();
+
+    const financialRelease = await collection.deleteOne({ _id: new ObjectId(id) });
   }
 }

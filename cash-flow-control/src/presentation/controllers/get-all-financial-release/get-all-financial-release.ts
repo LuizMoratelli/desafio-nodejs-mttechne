@@ -4,11 +4,11 @@ import { Controller, HttpRequest, HttpResponse } from './get-all-financial-relea
 import { Validator } from '@/infra/validation/class-validator/validator';
 
 export class GetAllFinancialReleaseController implements Controller {
-  constructor(private readonly getFinancialRelease: GetAllFinancialRelease, private readonly validator: Validator) {}
+  constructor(private readonly getAllFinancialRelease: GetAllFinancialRelease, private readonly validator: Validator) {}
 
   async handle(_: HttpRequest): Promise<HttpResponse> {
     try {
-      const financialRelease = await this.getFinancialRelease.getAll();
+      const financialRelease = await this.getAllFinancialRelease.getAll();
 
       return ok(financialRelease);
     } catch (error) {

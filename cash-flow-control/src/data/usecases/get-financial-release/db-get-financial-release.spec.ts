@@ -8,16 +8,16 @@ import {
 
 type SutTypes = {
   sut: DbGetFinancialRelease;
-  addFinancialReleaseRepository: GetFinancialReleaseRepository;
+  getFinancialReleaseRepository: GetFinancialReleaseRepository;
 };
 
 const makeSut = (): SutTypes => {
-  const addFinancialReleaseRepository = makeGetFinancialReleaseRepository();
-  const sut = new DbGetFinancialRelease(addFinancialReleaseRepository);
+  const getFinancialReleaseRepository = makeGetFinancialReleaseRepository();
+  const sut = new DbGetFinancialRelease(getFinancialReleaseRepository);
 
   return {
     sut,
-    addFinancialReleaseRepository,
+    getFinancialReleaseRepository,
   };
 };
 
@@ -48,8 +48,8 @@ describe('DbGetFinancialRelease Usecase', () => {
   });
 
   test('Should call GetFinancialReleaseRepository with correct values', async () => {
-    const { sut, addFinancialReleaseRepository } = makeSut();
-    const addSpy = jest.spyOn(addFinancialReleaseRepository, 'get');
+    const { sut, getFinancialReleaseRepository } = makeSut();
+    const addSpy = jest.spyOn(getFinancialReleaseRepository, 'get');
     const data = {
       id: 'valid_id',
     };
