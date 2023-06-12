@@ -5,8 +5,15 @@
 1. Baixar/Copiar o reposítorio;
 2. Executar o comando do docker:
 
-```ssh
+```sh
 docker-compose build && docker-compose up -d
+```
+
+3. É possível executar a cobertura dos testes unitários ao entrar no diretório de um dos serviços e executando o seguinte comando:
+
+```sh
+// cd cash-flow-control ou cd consolidated-daily
+npm run test:ci
 ```
 
 ## Utilização dos Serviços
@@ -29,12 +36,16 @@ docker-compose build && docker-compose up -d
 
 ![Arquitetura de Solução](./architecture.png 'Arquitetura de Solução')
 
-## Explicação Não-Técnica
+## Explicação não Técnica
 
-A arquitetura consiste de um banco de dados não relacional MongoDB e 2 serviços:
+A arquitetura consiste em um banco de dados e dois serviços:
 
 - cash-flow-control: efetua o registro dos lançamentos no banco de dados, assim como alterações e exclusões;
 - consolidated-daily: utiliza os lançamentos registrados para geração de um relatório simples de saldo consolidado diario.
+
+Os serviços foram construídos utilizando clean architecture - focando em camadas bem isoladas, reduzindo o acoplamento visando a evolução futura do projeto - e TDD - pensando na criação dos testes unitários mesmo antes da implementação das funcionalidades - para garantir um melhor e mais seguro funcionamento no geral.
+
+Dessa forma cada serviço é focado em um escopo bem definido, facilitando manutenções, mudanças e melhorias futuras.
 
 ## Cobertura de Testes
 

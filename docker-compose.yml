@@ -30,7 +30,6 @@ services:
       context: consolidated-daily
       dockerfile: ./Dockerfile
     restart: always
-    command: bash -c "npm install --omit=dev && npm run start"
     environment:
       - MONGO_URL=mongodb://mongo:27017/desafio-nodejs-mttechne
     ports:
