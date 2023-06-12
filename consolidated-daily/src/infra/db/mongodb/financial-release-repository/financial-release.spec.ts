@@ -51,15 +51,11 @@ describe('FinancialRelease Mongo Repository', () => {
     expect(financialRelease).toBeDefined();
     expect(financialRelease).toHaveLength(2);
     expect(financialRelease[0]).toMatchObject({
-      day: 10,
-      month: 6,
-      year: 2023,
+      date: '2023-06-10',
       total: 75,
     });
     expect(financialRelease[1]).toMatchObject({
-      day: 11,
-      month: 6,
-      year: 2023,
+      date: '2023-06-11',
       total: 27.5,
     });
   });

@@ -22,9 +22,7 @@ const makeReportFinancialRelease = (): ReportFinancialRelease => {
   class ReportFinancialReleaseStub implements ReportFinancialRelease {
     async report(): Promise<ReportModel[]> {
       const fakeFinancialRelease = {
-        day: 10,
-        month: 6,
-        year: 2023,
+        date: '2023-06-10',
         total: 100.0,
       };
 
@@ -43,10 +41,8 @@ describe('ReportFinancialRelease Controller', () => {
     expect(httpResponse.statusCode).toBe(200);
     expect(httpResponse.body).toEqual([
       {
-        day: 10,
-        month: 6,
+        date: '2023-06-10',
         total: 100,
-        year: 2023,
       },
     ]);
   });
