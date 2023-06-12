@@ -35,3 +35,79 @@ A arquitetura consiste de um banco de dados não relacional MongoDB e 2 serviço
 
 - cash-flow-control: efetua o registro dos lançamentos no banco de dados, assim como alterações e exclusões;
 - consolidated-daily: utiliza os lançamentos registrados para geração de um relatório simples de saldo consolidado diario.
+
+## Cobertura de Testes
+
+### Cash Flow Control
+
+```
+----------------------------------------------------|---------|----------|---------|---------|-------------------
+File                                                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------------------------------------------------|---------|----------|---------|---------|-------------------
+All files                                           |     100 |      100 |     100 |     100 |
+ data/usecases/add-financial-release                |     100 |      100 |     100 |     100 |
+  db-add-financial-release.ts                       |     100 |      100 |     100 |     100 |
+ data/usecases/delete-financial-release             |     100 |      100 |     100 |     100 |
+  db-delete-financial-release.ts                    |     100 |      100 |     100 |     100 |
+ data/usecases/get-all-financial-release            |     100 |      100 |     100 |     100 |
+  db-get-all-financial-release.ts                   |     100 |      100 |     100 |     100 |
+ data/usecases/get-financial-release                |     100 |      100 |     100 |     100 |
+  db-get-financial-release.ts                       |     100 |      100 |     100 |     100 |
+ data/usecases/update-financial-release             |     100 |      100 |     100 |     100 |
+  db-update-financial-release.ts                    |     100 |      100 |     100 |     100 |
+ infra/db/mongodb/financial-release-repository      |     100 |      100 |     100 |     100 |
+  financial-release.ts                              |     100 |      100 |     100 |     100 |
+ infra/db/mongodb/helpers                           |     100 |      100 |     100 |     100 |
+  mongodb-helper.ts                                 |     100 |      100 |     100 |     100 |
+ infra/validation/class-validator                   |     100 |      100 |     100 |     100 |
+  dto-validator.ts                                  |     100 |      100 |     100 |     100 |
+  index.ts                                          |     100 |      100 |     100 |     100 |
+  validator.ts                                      |     100 |      100 |     100 |     100 |
+ presentation/adapters                              |     100 |      100 |     100 |     100 |
+  class-validator-adapter.ts                        |     100 |      100 |     100 |     100 |
+ presentation/controllers/add-financial-release     |     100 |      100 |     100 |     100 |
+  add-financial-release.ts                          |     100 |      100 |     100 |     100 |
+ presentation/controllers/delete-financial-release  |     100 |      100 |     100 |     100 |
+  delete-financial-release.ts                       |     100 |      100 |     100 |     100 |
+ presentation/controllers/get-all-financial-release |     100 |      100 |     100 |     100 |
+  get-all-financial-release.ts                      |     100 |      100 |     100 |     100 |
+ presentation/controllers/get-financial-release     |     100 |      100 |     100 |     100 |
+  get-financial-release.ts                          |     100 |      100 |     100 |     100 |
+ presentation/controllers/update-financial-release  |     100 |      100 |     100 |     100 |
+  update-financial-release.ts                       |     100 |      100 |     100 |     100 |
+ presentation/errors                                |     100 |      100 |     100 |     100 |
+  index.ts                                          |     100 |      100 |     100 |     100 |
+  not-found.ts                                      |     100 |      100 |     100 |     100 |
+  server.ts                                         |     100 |      100 |     100 |     100 |
+ presentation/helpers                               |     100 |      100 |     100 |     100 |
+  http.ts                                           |     100 |      100 |     100 |     100 |
+ presentation/validation                            |     100 |      100 |     100 |     100 |
+  add-financial-release.ts                          |     100 |      100 |     100 |     100 |
+  delete-financial-release.ts                       |     100 |      100 |     100 |     100 |
+  get-financial-release.ts                          |     100 |      100 |     100 |     100 |
+  update-financial-release.ts                       |     100 |      100 |     100 |     100 |
+----------------------------------------------------|---------|----------|---------|---------|-------------------
+```
+
+### Consolidated Daily
+
+```
+---------------------------------------------------|---------|----------|---------|---------|-------------------
+File                                               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+---------------------------------------------------|---------|----------|---------|---------|-------------------
+All files                                          |     100 |      100 |     100 |     100 |
+ data/usecases/report-financial-release            |     100 |      100 |     100 |     100 |
+  db-report-financial-release.ts                   |     100 |      100 |     100 |     100 |
+ infra/db/mongodb/financial-release-repository     |     100 |      100 |     100 |     100 |
+  financial-release.ts                             |     100 |      100 |     100 |     100 |
+ infra/db/mongodb/helpers                          |     100 |      100 |     100 |     100 |
+  mongodb-helper.ts                                |     100 |      100 |     100 |     100 |
+ presentation/controllers/report-financial-release |     100 |      100 |     100 |     100 |
+  report-financial-release.ts                      |     100 |      100 |     100 |     100 |
+ presentation/errors                               |     100 |      100 |     100 |     100 |
+  index.ts                                         |     100 |      100 |     100 |     100 |
+  server.ts                                        |     100 |      100 |     100 |     100 |
+ presentation/helpers                              |     100 |      100 |     100 |     100 |
+  http.ts                                          |     100 |      100 |     100 |     100 |
+---------------------------------------------------|---------|----------|---------|---------|-------------------
+```
